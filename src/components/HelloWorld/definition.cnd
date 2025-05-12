@@ -1,0 +1,3 @@
+[feedbackWidget:helloWorld] > jnt:content, feedbackWidgetmix:component orderable
+ - name (string) i18n mandatory
+ + * (feedbackWidget:helloCard) = feedbackWidget:helloCard
