@@ -1,13 +1,4 @@
 services:
-  postgres:
-    image: postgres:16
-    networks:
-      stack:
-        ipv4_address: 172.16.1.10
-    environment:
-      POSTGRES_USER: jahia
-      POSTGRES_PASSWORD: dbpassword
-
   jahia:
     container_name: jahia
     image: jahia/jahia-ee:8.2
@@ -17,8 +8,8 @@ services:
       - 8080:8080
       - 9229:9229
     networks:
-      stack:
-        ipv4_address: 172.16.1.30
+      default:
+        ipv4_address: 172.16.1.100
     environment:
       DB_VENDOR: postgresql
       DB_URL: jdbc:postgresql://postgres:5432/jahia
@@ -28,27 +19,33 @@ services:
       EXECUTE_PROVISIONING_SCRIPT: "file:/mnt/jahia/provisioning.yaml"
     volumes:
       - type: bind
-        source: ./mnt-jahia
+        source: ./docker
         target: /mnt/jahia
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/"]
+      interval: 5s
+      timeout: 1s
+      retries: 20
+      start_period: 20s
+
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: jahia
+      POSTGRES_PASSWORD: dbpassword
 
   elasticsearch:
     image: elasticsearch:7.17.28
     ports:
       - 9200:9200
-    networks:
-      stack:
-        ipv4_address: 172.16.1.20
     environment:
       discovery.type: single-node
       cluster.name: jahia-es-cluster
 
-  # Kibana container
   kibana:
     image: kibana:7.17.28
     ports:
       - 5601:5601
-    networks:
-      - stack
     environment:
       discovery.type: single-node
       elasticsearch.hosts: http://elasticsearch:9200
@@ -61,21 +58,18 @@ services:
       - 9443:9443
       - 8181:8181
       - 8102:8102
-    networks:
-      stack:
-        ipv4_address: 172.16.1.40
     environment:
       UNOMI_ELASTICSEARCH_ADDRESSES: elasticsearch:9200
       UNOMI_ELASTICSEARCH_CLUSTERNAME: jahia-es-cluster
       UNOMI_CLUSTER_PUBLIC_ADDRESS: http://localhost:8181
       UNOMI_CLUSTER_INTERNAL_ADDRESS: https://jcustomer:9443
-      UNOMI_THIRDPARTY_PROVIDER1_IPADDRESSES: 172.16.1.30
+      UNOMI_THIRDPARTY_PROVIDER1_IPADDRESSES: 172.16.1.100
       UNOMI_THIRDPARTY_PROVIDER1_ALLOWEDEVENTS: login,updateProperties
       UNOMI_ROOT_PASSWORD: karaf
       UNOMI_HAZELCAST_TCPIP_MEMBERS: jcustomer
 
 networks:
-  stack:
+  default:
     ipam:
       config:
         - subnet: 172.16.1.0/24

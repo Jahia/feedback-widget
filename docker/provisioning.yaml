@@ -11,7 +11,6 @@
     - "js:mvn:org.jahia.modules.javascript/luxe-jahia-demo/0.6.1/tgz"
   autoStart: true
   uninstallPreviousVersion: true
-
 - importSite: "jar:mvn:org.jahia.modules/luxe-prepackaged-website/0.6.1/zip/import!/luxe.zip"
 
 # Enable jExperience
@@ -29,7 +28,7 @@
     jexperience.jCustomerUsePublicAddressesForAdmin: "false"
     jexperience.jCustomerKey: "670c26d1cc413346c3b2fd9ce65dab41"
 
-# Configure jExperience dashboards
+# Configure Kibana dashboards
 - editConfiguration: "org.jahia.modules.kibana_dashboards_provider"
   properties:
     kibana_dashboards_provider.kibanaURL: "http://kibana:5601"
@@ -37,8 +36,10 @@
     kibana_dashboards_provider.kibanaPassword: "ELASTIC_PASSWORD"
     kibana_dashboards_provider.KibanaProxy.enable: "true"
     kibana_dashboards_provider.KibanaProxy.cloud: "true"
-
 - installBundle:
     - "mvn:org.jahia.modules/kibana-dashboards-provider/1.3.0"
   autoStart: true
   uninstallPreviousVersion: true
+
+- enable: "jexperience-dashboards"
+  site: "luxe"
