@@ -1,5 +1,5 @@
 {
-  "name": "feedbackWidget",
+  "name": "feedback-widget",
   "version": "0.0.1",
   "type": "module",
   "files": [
@@ -51,7 +51,6 @@
   "jahia": {
     "snapshot": true,
     "module-dependencies": "default",
-    "module-type": "templatesSet",
     "server": "dist/server/index.js",
     "static-resources": "/dist,/locales,/images,/icons"
   }
