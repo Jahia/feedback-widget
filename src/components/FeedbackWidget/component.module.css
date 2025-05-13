@@ -1,14 +1,82 @@
 .card {
-  display: grid;
-  grid-template-rows: 1fr auto;
-  gap: 0.5rem;
-  align-items: center;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  text-align: center;
+  border-radius: 0.25rem;
   box-shadow: 0 0 5px 0 #0002;
+  font-size: 0.875em;
 
-  p {
-    margin: 0;
+  > * {
+    padding: 1em;
+    transition:
+      opacity 66ms ease-in-out,
+      background-color 66ms ease-in-out;
+  }
+}
+
+.card > [inert] {
+  opacity: 0.8;
+  background-color: #8882;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+}
+
+.submit {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.input {
+  border-radius: 0.25em;
+  border: 1px solid #0002;
+  background: transparent;
+  padding: 0.25em;
+  line-height: 1.25;
+  transition:
+    background-color 66ms ease-in-out,
+    border-color 66ms ease-in-out;
+
+  &:hover,
+  &:focus {
+    border-color: #0008;
+  }
+
+  &:is(button):hover,
+  &:is(button):focus {
+    background: #0002;
+  }
+}
+
+.spinner {
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  border: 2px solid #0002;
+  border-top-color: #000;
+  animation: spin 0.5s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
