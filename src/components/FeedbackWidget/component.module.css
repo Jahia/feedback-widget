@@ -52,13 +52,13 @@
     background-color 66ms ease-in-out,
     border-color 66ms ease-in-out;
 
-  &:hover,
-  &:focus {
+  &:hover:enabled,
+  &:focus:enabled {
     border-color: #0008;
   }
 
-  &:is(button):hover,
-  &:is(button):focus {
+  &:is(button):hover:enabled,
+  &:is(button):focus:enabled {
     background: #0002;
   }
 }
