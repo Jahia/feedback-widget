@@ -2,12 +2,26 @@
   border-radius: 0.25rem;
   box-shadow: 0 0 5px 0 #0002;
   font-size: 0.875em;
+  color: var(--jac-secondary-color);
 
   > * {
     padding: 1em;
     transition:
       opacity 66ms ease-in-out,
       background-color 66ms ease-in-out;
+  }
+}
+
+/* Make the widget smaller in the TOC, before interactions */
+:global(#toc) .card[data-interacted="false"] {
+  box-shadow: none;
+
+  > * {
+    padding: 0;
+  }
+
+  .buttons {
+    justify-content: start;
   }
 }
 
@@ -43,6 +57,9 @@
 }
 
 .input {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25em;
   border-radius: 0.25em;
   border: 1px solid #0002;
   background: transparent;
