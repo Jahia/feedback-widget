@@ -1,1 +1,10 @@
-[feedbackWidget:widget] > jnt:content, feedbackWidgetmix:component
+[feedbackWidget:widget] > jnt:content, feedbackWidgetmix:component, mix:title
+ - jcr:title (string) = 'Was this helpful?' autocreated
+ - yes (string) = 'Yes' autocreated
+ - no (string) = 'No' autocreated
+ - happy (string) = 'Glad to hear that! Can we do anything to make it better?' autocreated
+ - sad (string) = 'We\'re sorry to hear that, what can we do to improve?' autocreated
+ - send (string) = 'Send' autocreated
+ - sending (string) = 'Sending...' autocreated
+ - sent (string) = 'Thank you for your feedback!' autocreated
+ - error (string) = 'Something went wrong, your browser might have blocked the request.' autocreated
