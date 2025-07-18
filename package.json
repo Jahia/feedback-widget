@@ -5,8 +5,7 @@
   "files": [
     "dist",
     "src/**/*.cnd",
-    "settings",
-    "static"
+    "settings"
   ],
   "scripts": {
     "build": "tsc --noEmit && vite build && run package",
