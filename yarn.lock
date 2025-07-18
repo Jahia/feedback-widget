@@ -19,6 +19,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@chachalog/types@npm:^0.4.1":
+  version: 0.4.1
+  resolution: "@chachalog/types@npm:0.4.1"
+  checksum: 10c0/6af699a352d5103e893e84cad7d92e1000f287265b480fbf78838491392aee86315540ea3c7c26ca8c07203a7b50c62ab296b8aee25e46928c8778ed954f1d0e
+  languageName: node
+  linkType: hard
+
 "@esbuild/aix-ppc64@npm:0.25.4":
   version: 0.25.4
   resolution: "@esbuild/aix-ppc64@npm:0.25.4"
@@ -1880,6 +1887,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "feedback-widget@workspace:."
   dependencies:
+    "@chachalog/types": "npm:^0.4.1"
     "@eslint-react/eslint-plugin": "npm:^1.52.3"
     "@eslint/compat": "npm:^1.3.1"
     "@eslint/js": "npm:^9.31.0"
