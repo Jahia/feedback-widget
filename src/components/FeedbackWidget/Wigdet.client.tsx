@@ -47,6 +47,13 @@ export default function Widget(t: Props) {
     return;
   }
 
+  // Also hide if consent was not given
+  // @ts-expect-error window.digitalData is not typed
+  if (!("digitalData" in window) || !window.digitalData?.wemInitConfig?.activateWem) {
+    console.warn("Consent not given, feedback widget will not be displayed.");
+    return;
+  }
+
   return (
     <aside className={classes.card} data-interacted={happy !== undefined}>
       <div inert={happy !== undefined} className={classes.buttons}>
@@ -95,10 +102,17 @@ export default function Widget(t: Props) {
 
             const source = wem.buildSourcePage();
             const target = wem.buildTarget("comment", "feedback", { happy, comment });
+
+            // If the request takes too long, we assume an error
+            const timeout = setTimeout(() => {
+              setState("error");
+            }, 5000);
+
             setState("sending");
             wem.collectEvents(
               { events: [wem.buildEvent("click", target, source)] },
               () => {
+                clearTimeout(timeout);
                 setState("sent");
               },
               () => {
