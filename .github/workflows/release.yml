@@ -32,7 +32,9 @@ jobs:
           path: dist/package.tgz
       - name: Attach build artifact to release
         run: |
-          tag=feedback-widget@$(yarn node -e 'console.log(process.env.npm_package_version)')
-          gh release upload $tag dist/package.tgz || true
+          name=$(yarn node -p 'process.env.npm_package_name')
+          version=$(yarn node -p 'process.env.npm_package_version')
+          tag=$name@$version
+          gh release upload $tag dist/package.tgz#$name-$version.tgz || true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

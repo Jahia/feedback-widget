@@ -2,7 +2,7 @@ import {
   AddResources,
   buildModuleFileUrl,
   jahiaComponent,
-  RenderInBrowser,
+  Island,
 } from "@jahia/javascript-modules-library";
 import Widget from "./Wigdet.client.jsx";
 
@@ -33,11 +33,26 @@ jahiaComponent(
       </div>
     ) : (
       <>
-        <RenderInBrowser
-          child={Widget}
+        <Island
+          clientOnly
+          component={Widget}
           props={{ "jcr:title": title, yes, no, happy, sad, send, sending, sent, error }}
         />
         <AddResources type="css" resources={buildModuleFileUrl("dist/assets/style.css")} />
+        <AddResources
+          targetTag="head"
+          inlineResource={
+            /* HTML */ `<script>
+              window.digitalDataOverrides ??= [];
+              window.digitalDataOverrides.push({
+                wemInitConfig: {
+                  requiredProfileProperties: ["*"],
+                  requiredSessionProperties: ["*"],
+                },
+              });
+            </script>`
+          }
+        />
       </>
     ),
 );
