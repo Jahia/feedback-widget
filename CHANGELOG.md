@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.0
+
+* Support JSM v1
+
 ## 1.0.2
 
 * Hide the widget if consent is not given (#3)
